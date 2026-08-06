@@ -23,6 +23,15 @@ is the landing page and `app.html` is the app, so links behave the same in both
 places. `server.js` is a dev convenience only — GitHub Pages serves the static
 files directly and never runs it.
 
+## Deploying
+
+Pushing to `main` publishes to GitHub Pages automatically; a build takes about
+a minute. GitHub Pages serves CSS and JS with a ~10 minute cache, so **when you
+change a stylesheet, bump the `?v=` on the `<link>` tags** in `index.html` and
+`app.html` — otherwise returning visitors keep the old CSS until the cache
+expires. `.nojekyll` is there so Pages serves the files as-is rather than
+running them through Jekyll.
+
 ## The mark
 
 `assets/logo.svg` — an ACT answer bubble with a check breaking out of it, on a
