@@ -163,6 +163,9 @@
 html {
   -webkit-text-size-adjust: 100%;   /* no surprise reflow on rotate */
   scroll-behavior: smooth;
+  /* Note: do NOT add overflow-x here. Both `hidden` and `clip` on the root
+     break position:sticky for descendants (it kills the sticky header).
+     Decorative elements must simply not exceed the viewport — see .glow. */
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

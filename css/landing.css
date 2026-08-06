@@ -2,14 +2,16 @@
 
 body.landing { background: var(--surface-0); overflow-x: hidden; }
 
-/* Ambient light behind the hero. Fixed size in vmax so it never causes
-   horizontal overflow on a phone. */
+/* Ambient light behind the hero. Pinned left:0/right:0 with no explicit width,
+   so it is exactly viewport-wide and cannot push the page sideways — a fixed
+   vmax width overflowed on narrow screens and left the page scrollable
+   horizontally. The gradients are positioned in %, so the look is unchanged. */
 .glow {
-  position: absolute; top: -28vmax; left: 50%; z-index: 0;
-  width: 90vmax; height: 60vmax; transform: translateX(-50%);
+  position: absolute; top: -20vmax; left: 0; right: 0; z-index: 0;
+  height: 62vmax;
   background:
-    radial-gradient(45% 50% at 40% 50%, color-mix(in srgb, var(--primary) 26%, transparent), transparent 70%),
-    radial-gradient(40% 45% at 62% 42%, color-mix(in srgb, var(--accent)  22%, transparent), transparent 70%);
+    radial-gradient(48% 52% at 36% 55%, color-mix(in srgb, var(--primary) 26%, transparent), transparent 70%),
+    radial-gradient(44% 48% at 64% 45%, color-mix(in srgb, var(--accent)  22%, transparent), transparent 70%);
   filter: blur(30px);
   pointer-events: none;
 }
