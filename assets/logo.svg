@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48" role="img" aria-label="ElleCT">
+  <title>ElleCT</title>
+  <defs>
+    <linearGradient id="ellect-g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#6e9bff"/>
+      <stop offset="1" stop-color="#9b8cff"/>
+    </linearGradient>
+  </defs>
+  <!-- the tile -->
+  <rect width="48" height="48" rx="13" fill="url(#ellect-g)"/>
+  <!-- an unfilled answer bubble… -->
+  <circle cx="21" cy="26.5" r="9.6" fill="none" stroke="#fff" stroke-width="3.5" opacity=".58"/>
+  <!-- …and the check that breaks out of it -->
+  <path d="M14.6 26.8 19.6 31.8 34.2 13.6" fill="none" stroke="#fff" stroke-width="4.3"
+        stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- confetti -->
+  <circle cx="38.4" cy="24.6" r="2" fill="#fff" opacity=".85"/>
+  <circle cx="33.2" cy="31.6" r="1.35" fill="#fff" opacity=".55"/>
+</svg>

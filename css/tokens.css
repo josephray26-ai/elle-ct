@@ -1,0 +1,215 @@
+/* ============================================================================
+   ElleCT — design tokens
+   ----------------------------------------------------------------------------
+   Borrowed deliberately:
+   · Material 3      — role-based semantic tokens (surface / on-surface / primary)
+                       rather than raw color names, so themes swap cleanly.
+   · IBM Carbon      — in dark mode surfaces get LIGHTER as elevation rises;
+                       in light mode they get darker. Elevation reads without
+                       leaning on heavy shadows.
+   · Atlassian       — dark mode combines a lifted surface WITH a soft shadow
+                       instead of maximizing contrast, which is fatiguing.
+   · Adobe Spectrum  — touch platforms scale up ~1.25×. Controls are 48px on
+                       mobile, 40px on pointer devices; type scales with them.
+   · GOV.UK / WCAG   — 44px minimum tap target and 8px minimum separation are
+                       constraints, not suggestions.
+   ========================================================================== */
+
+:root {
+  /* ---- palette: dark is the default surface for long study sessions ---- */
+  --surface-0:  #0b0d10;   /* page */
+  --surface-1:  #12151a;   /* card */
+  --surface-2:  #181c23;   /* raised: inputs, chips */
+  --surface-3:  #212632;   /* raised further: hover, popovers */
+  --surface-in: #0e1116;   /* inset: wells, code, passage bodies */
+
+  --border:        #262c37;
+  --border-strong: #39414f;
+
+  --text:       #e9ecf2;
+  --text-muted: #98a2b3;
+  --text-faint: #6b7484;
+
+  --primary:      #6e9bff;
+  --primary-hover:#87adff;
+  --primary-ink:  #08101f;   /* text ON primary */
+  --primary-soft: color-mix(in srgb, var(--primary) 16%, transparent);
+  --accent:       #9b8cff;
+
+  --success:      #34d399;
+  --success-soft: color-mix(in srgb, var(--success) 15%, transparent);
+  --danger:       #fb7185;
+  --danger-soft:  color-mix(in srgb, var(--danger) 15%, transparent);
+  --warning:      #fbbf24;
+  --warning-soft: color-mix(in srgb, var(--warning) 15%, transparent);
+
+  --focus: var(--primary);
+
+  /* ---- elevation (Atlassian: shadow + surface, never contrast alone) ---- */
+  --shadow-1: 0 1px 2px rgb(0 0 0 / .28);
+  --shadow-2: 0 4px 14px rgb(0 0 0 / .34);
+  --shadow-3: 0 14px 40px rgb(0 0 0 / .44);
+
+  /* ---- type ------------------------------------------------------------
+     Fluid between a 360px phone and a 1280px desktop. Body never drops below
+     16px: iOS Safari auto-zooms any focused input under 16px.               */
+  --font: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Inter,
+          Roboto, "Helvetica Neue", sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+
+  --fs-xs:  0.75rem;                                    /* 12 — meta only */
+  --fs-sm:  0.8125rem;                                  /* 13 */
+  --fs-md:  1rem;                                       /* 16 — floor */
+  --fs-lg:  clamp(1.0625rem, 0.99rem + 0.32vw, 1.1875rem);
+  --fs-xl:  clamp(1.25rem,  1.13rem + 0.53vw,  1.5rem);
+  --fs-2xl: clamp(1.5rem,   1.24rem + 1.15vw,  2.125rem);
+  --fs-3xl: clamp(1.875rem, 1.44rem + 1.93vw,  3rem);
+  --fs-4xl: clamp(2.125rem, 1.47rem + 2.91vw,  4rem);
+
+  --lh-tight: 1.15;
+  --lh-snug:  1.35;
+  --lh-body:  1.6;
+
+  /* ---- space (4pt grid) ---- */
+  --s-1: 4px;  --s-2: 8px;  --s-3: 12px; --s-4: 16px;
+  --s-5: 20px; --s-6: 24px; --s-8: 32px; --s-10: 40px;
+  --s-12: 48px; --s-16: 64px; --s-20: 80px;
+
+  /* ---- shape ---- */
+  --r-sm: 8px; --r-md: 12px; --r-lg: 16px; --r-xl: 22px; --r-full: 999px;
+
+  /* ---- controls: Spectrum's touch-up-scale ---- */
+  --tap-min: 44px;        /* WCAG 2.5.5 / Apple HIG floor */
+  --control-h: 48px;      /* mobile default */
+  --control-px: 18px;
+  --gap-min: 8px;         /* minimum separation between tap targets */
+
+  /* ---- motion ---- */
+  --ease: cubic-bezier(.2, .8, .2, 1);
+  --ease-spring: cubic-bezier(.34, 1.42, .48, 1);
+  --t-fast: 120ms;
+  --t-mid:  200ms;
+  --t-slow: 340ms;
+
+  /* ---- layout ---- */
+  --page-max: 780px;
+  --wide-max: 1140px;
+  --safe-t: env(safe-area-inset-top, 0px);
+  --safe-b: env(safe-area-inset-bottom, 0px);
+  --safe-l: env(safe-area-inset-left, 0px);
+  --safe-r: env(safe-area-inset-right, 0px);
+  --navbar-h: 60px;       /* bottom tab bar on mobile */
+
+  color-scheme: dark;
+}
+
+/* Pointer devices: Spectrum's 1:1.25 — controls shrink ~20% off touch. */
+@media (pointer: fine) and (min-width: 700px) {
+  :root { --control-h: 40px; --control-px: 15px; }
+}
+
+/* ---- light theme ---------------------------------------------------------
+   Carbon inverted: surfaces get DARKER as they rise, so the same elevation
+   ladder reads correctly in both themes.                                    */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --surface-0:  #f7f8fb;
+    --surface-1:  #ffffff;
+    --surface-2:  #f1f4f9;
+    --surface-3:  #e7ebf3;
+    --surface-in: #f4f6fa;
+
+    --border:        #e0e5ee;
+    --border-strong: #c3cbd9;
+
+    --text:       #0e1117;
+    --text-muted: #59626f;
+    --text-faint: #858e9c;
+
+    --primary:      #2563eb;
+    --primary-hover:#1d4ed8;
+    --primary-ink:  #ffffff;
+    --accent:       #6d4aff;
+
+    --success: #0f9d6e;
+    --danger:  #dc2f45;
+    --warning: #b7791f;
+
+    --shadow-1: 0 1px 2px rgb(16 24 40 / .06);
+    --shadow-2: 0 6px 18px rgb(16 24 40 / .09);
+    --shadow-3: 0 18px 46px rgb(16 24 40 / .14);
+
+    color-scheme: light;
+  }
+}
+
+:root[data-theme="light"] {
+  --surface-0:  #f7f8fb;  --surface-1: #ffffff;  --surface-2: #f1f4f9;
+  --surface-3:  #e7ebf3;  --surface-in: #f4f6fa;
+  --border: #e0e5ee;      --border-strong: #c3cbd9;
+  --text: #0e1117;        --text-muted: #59626f;  --text-faint: #858e9c;
+  --primary: #2563eb;     --primary-hover: #1d4ed8; --primary-ink: #ffffff;
+  --accent: #6d4aff;      --success: #0f9d6e; --danger: #dc2f45; --warning: #b7791f;
+  --shadow-1: 0 1px 2px rgb(16 24 40 / .06);
+  --shadow-2: 0 6px 18px rgb(16 24 40 / .09);
+  --shadow-3: 0 18px 46px rgb(16 24 40 / .14);
+  color-scheme: light;
+}
+:root[data-theme="dark"] { color-scheme: dark; }
+
+/* ============================ base ====================================== */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;   /* no surprise reflow on rotate */
+  scroll-behavior: smooth;
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .01ms !important; animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--surface-0);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: var(--fs-md);
+  line-height: var(--lh-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-wrap: break-word;         /* long passages never blow out the page */
+}
+
+h1, h2, h3 { line-height: var(--lh-tight); font-weight: 680; letter-spacing: -.02em; margin: 0; }
+p { margin: 0; }
+a { color: var(--primary); text-decoration: none; }
+
+/* One focus style everywhere, visible on every surface. */
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+  border-radius: var(--r-sm);
+}
+
+/* Inputs: 16px floor is load-bearing — smaller and iOS zooms on focus. */
+input, select, textarea, button { font: inherit; font-size: max(1rem, var(--fs-md)); }
+
+::selection { background: var(--primary-soft); }
+
+/* Scrollbars that don't shout on dark surfaces */
+* { scrollbar-width: thin; scrollbar-color: var(--border-strong) transparent; }
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: var(--r-full);
+                            border: 3px solid transparent; background-clip: content-box; }
+
+/* A `display` rule anywhere else would silently defeat the hidden attribute. */
+[hidden] { display: none !important; }
+
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}

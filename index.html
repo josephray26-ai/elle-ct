@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#0b0d10" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+<meta name="description" content="Drill ACT questions from your own old tests, a few at a time. ElleCT tells you why you missed each one and tracks how far you are from your goal score.">
+<title>ElleCT — drill your own ACT tests, a few questions at a time</title>
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/landing.css">
+<link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+</head>
+<body class="landing">
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <g id="l-bolt" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3 5 13.5h5.5L11 21l8-10.5h-5.5z"/></g>
+  <g id="l-coach" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 18h5M10 21h4"/><path d="M12 3a6 6 0 0 0-3.5 10.9V15h7v-1.1A6 6 0 0 0 12 3Z"/></g>
+  <g id="l-goal" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V4"/><path d="M4 5.5h11l-2 3 2 3H4"/><path d="M4 20h16"/></g>
+  <g id="l-upload" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15.5V4m0 0L8 8m4-4 4 4"/><path d="M4 15v3.5A1.5 1.5 0 0 0 5.5 20h13a1.5 1.5 0 0 0 1.5-1.5V15"/></g>
+  <g id="l-clock" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></g>
+  <g id="l-pen" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15.5 4.5 19.5 8.5 9 19H5v-4z"/><path d="M13.5 6.5 17.5 10.5"/></g>
+  <g id="l-lock" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="10" width="15" height="10" rx="2.5"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></g>
+</defs></svg>
+
+<div class="glow" aria-hidden="true"></div>
+
+<nav class="lnav" id="lnav">
+  <a class="brand" href="landing.html">
+    <svg class="mark" viewBox="0 0 48 48" width="30" height="30" aria-hidden="true">
+      <defs><linearGradient id="lgL" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#6e9bff"/><stop offset="1" stop-color="#9b8cff"/>
+      </linearGradient></defs>
+      <rect width="48" height="48" rx="13" fill="url(#lgL)"/>
+      <circle cx="21" cy="26.5" r="9.6" fill="none" stroke="#fff" stroke-width="3.5" opacity=".58"/>
+      <path d="M14.6 26.8 19.6 31.8 34.2 13.6" fill="none" stroke="#fff" stroke-width="4.3"
+            stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="38.4" cy="24.6" r="2" fill="#fff" opacity=".85"/>
+      <circle cx="33.2" cy="31.6" r="1.35" fill="#fff" opacity=".55"/>
+    </svg>
+    ElleCT
+  </a>
+  <div class="spacer"></div>
+  <div class="lnav-links">
+    <a href="#how">How it works</a>
+    <a href="#features">Features</a>
+    <a href="#privacy">Privacy</a>
+  </div>
+  <a class="btn btn-primary" href="app.html" style="min-height:44px;padding:0 20px;font-size:var(--fs-sm)">Open the app</a>
+</nav>
+
+<div class="wrap">
+
+  <!-- ============================ HERO ============================ -->
+  <header class="hero">
+    <div>
+      <span class="eyebrow"><span class="dot"></span> Runs entirely on your device</span>
+      <h1 class="display">Stop taking whole practice tests. <em>Drill the questions.</em></h1>
+      <p class="lede">
+        Upload the ACT tests you already have. ElleCT breaks them into single
+        questions, feeds them to you in five-minute stretches, explains every
+        miss, and tracks the gap to your goal score.
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="app.html#import">Import a test →</a>
+        <a class="btn btn-ghost" href="app.html#study">Start a drill</a>
+      </div>
+      <p class="cta-note">No account, no upload, no subscription. Your tests never leave this device.</p>
+    </div>
+
+    <!-- The hero demo is a working question, not a screenshot. -->
+    <div class="demo" id="demo">
+      <div class="demo-bar">
+        <span class="pill" id="demoSubject">English</span>
+        <span id="demoSource">ACT 2019 · #14</span>
+        <span class="right" id="demoProgress">1 / 3</span>
+      </div>
+      <div class="demo-body">
+        <p class="demo-stem" id="demoStem"></p>
+        <div class="demo-choices" id="demoChoices"></div>
+        <div class="demo-feedback" id="demoFeedback" hidden></div>
+      </div>
+      <div class="demo-foot">
+        <span class="hint" id="demoHint">Pick an answer — this one is live.</span>
+        <button id="demoNext" hidden>Next question</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================ PROOF ============================ -->
+  <div class="strip reveal">
+    <div><div class="k">5 min</div><div class="v">a useful session, instead of 3 hours</div></div>
+    <div><div class="k">1 tap</div><div class="v">from opening it to answering</div></div>
+    <div><div class="k">9</div><div class="v">miss patterns it diagnoses</div></div>
+    <div><div class="k">0</div><div class="v">bytes sent anywhere</div></div>
+  </div>
+
+  <!-- ============================ HOW ============================ -->
+  <section class="band" id="how">
+    <div class="section-head reveal">
+      <h2>Three steps, then it runs itself</h2>
+      <p>The setup is one afternoon of importing. After that you just open it and answer.</p>
+    </div>
+    <div class="steps reveal">
+      <div class="step">
+        <h3>Drop in your old tests</h3>
+        <p>PDF, text, or a paste from anywhere. It pulls out the questions, the choices,
+           the passages, and the answer key — and shows you a preview before saving.</p>
+      </div>
+      <div class="step">
+        <h3>Drill in the gaps</h3>
+        <p>Waiting for a ride, five minutes before class. Pick a subject or a weak topic,
+           answer a handful, close it. Spaced repetition decides what comes back and when.</p>
+      </div>
+      <div class="step">
+        <h3>Watch the gap close</h3>
+        <p>Log your practice-test scores and the app draws the line to your target,
+           in the unit that matters: how many more questions per section you need right.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ FEATURES ============================ -->
+  <section class="band" id="features">
+    <div class="section-head reveal">
+      <h2>Built for the way you actually study</h2>
+      <p>Short sessions, honest feedback, and a number that tells you whether it's working.</p>
+    </div>
+
+    <div class="bento reveal">
+      <div class="cell">
+        <div class="ic"><svg viewBox="0 0 24 24" width="19" height="19"><use href="#l-coach"/></svg></div>
+        <h3>It tells you what you did wrong</h3>
+        <p>Every miss gets an explanation — from your own material if it came with one,
+           from Claude if you add a key, and always a rule you can carry to the next question.
+           Then it names the habit behind the miss: leaning on NO CHANGE, picking the longest
+           answer, rushing the ones you actually knew.</p>
+        <div class="mini-tags">
+          <span class="hot">punctuation 38%</span>
+          <span class="hot">misses are your fastest answers</span>
+          <span>inference 79%</span>
+        </div>
+      </div>
+
+      <div class="cell">
+        <div class="ic"><svg viewBox="0 0 24 24" width="19" height="19"><use href="#l-goal"/></svg></div>
+        <h3>Gap to goal</h3>
+        <p>Bar is where you are, marker is your target.</p>
+        <div class="mini">
+          <div class="mini-row"><span class="nm">English</span><span class="track"><i class="fill" data-w="75"></i><span class="mk" style="left:83%"></span></span></div>
+          <div class="mini-row"><span class="nm">Math</span><span class="track"><i class="fill" data-w="67"></i><span class="mk" style="left:78%"></span></span></div>
+          <div class="mini-row"><span class="nm">Reading</span><span class="track"><i class="fill" data-w="81"></i><span class="mk" style="left:89%"></span></span></div>
+          <div class="mini-row"><span class="nm">Science</span><span class="track"><i class="fill" data-w="72"></i><span class="mk" style="left:83%"></span></span></div>
+        </div>
+      </div>
+
+      <div class="cell">
+        <div class="ic"><svg viewBox="0 0 24 24" width="19" height="19"><use href="#l-upload"/></svg></div>
+        <h3>Your tests, parsed</h3>
+        <p>Handles A–D, F–J, and Math's A–E / F–K. Passages attach to their questions.
+           Paste an answer key in any format and it maps by number.</p>
+      </div>
+
+      <div class="cell">
+        <div class="ic"><svg viewBox="0 0 24 24" width="19" height="19"><use href="#l-bolt"/></svg></div>
+        <h3>Spaced repetition that respects your time</h3>
+        <p>Questions you miss come back tomorrow. Ones you've nailed twice come back in a
+           month. Choose smart mix, weak spots only, unseen only, or just what you flagged —
+           then 5, 10, 20 questions, or endless.</p>
+      </div>
+
+      <div class="cell">
+        <div class="ic"><svg viewBox="0 0 24 24" width="19" height="19"><use href="#l-clock"/></svg></div>
+        <h3>Real ACT pacing</h3>
+        <p>Optional per-question clock at section pace — 36s English, 35s Math,
+           52s Reading and Science — so speed is something you practice, not discover on test day.</p>
+      </div>
+
+      <div class="cell">
+        <div class="ic"><svg viewBox="0 0 24 24" width="19" height="19"><use href="#l-pen"/></svg></div>
+        <h3>Writing prompts too</h3>
+        <p>Pull a prompt, start the 40-minute clock, write. Drafts save as you type.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ PRIVACY ============================ -->
+  <section class="band" id="privacy">
+    <div class="note reveal">
+      <span class="ic"><svg viewBox="0 0 24 24" width="22" height="22"><use href="#l-lock"/></svg></span>
+      <div>
+        <h3>Your tests stay on your device</h3>
+        <p>Everything — questions, answers, essays, scores — lives in this browser's local
+          storage. There's no server, no account, and nothing is uploaded. Export a JSON
+          backup whenever you want to move it, and delete the whole library in two clicks.
+          The one exception is opt-in and yours to control: if you add an Anthropic API key
+          for written explanations, that question is sent to Claude and nowhere else.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ FINAL CTA ============================ -->
+  <section class="final reveal">
+    <h2>Five minutes beats three hours you'll skip</h2>
+    <p>Import one old test and drill it tonight.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="app.html#import">Import a test →</a>
+      <a class="btn btn-ghost" href="app.html#study">Open the app</a>
+    </div>
+  </section>
+
+  <footer class="lfoot">
+    <span>ElleCT — local-first ACT practice</span>
+    <span class="spacer"></span>
+    <span>Not affiliated with ACT, Inc.</span>
+  </footer>
+</div>
+
+<script type="module" src="js/landing.js"></script>
+</body>
+</html>
